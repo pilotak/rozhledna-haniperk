@@ -22,3 +22,5 @@ dist/
 *-error.log
 
 coverage/
+static/
+dist/

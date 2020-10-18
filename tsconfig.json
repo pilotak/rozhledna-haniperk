@@ -1,20 +1,19 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "es6",
     "module": "es6",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     "strict": true,
     "alwaysStrict": true,
-    "composite": true
+    "composite": true,
+    "typeRoots": ["./types", "node_modules/@types"]
   },
-  "typeRoots": ["src/types", "node_modules/@types"],
   "include": ["src"],
   "exclude": ["**/node_modules", "**/__tests__"]
 }

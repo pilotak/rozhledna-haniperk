@@ -1,10 +1,9 @@
-import * as fullpage from 'fullpage.js';
-import './style.scss';
+import fullpage from 'fullpage.js';
+import '../styles/index.scss';
 
 const fp = new fullpage('#fullpage', {
-  //options here
+  licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
   autoScrolling: true,
-  scrollHorizontally: true,
   scrollBar: true,
   responsiveHeight: 500,
 });
