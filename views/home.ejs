@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="cs" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Počasí rozhledna Haniperk" />
+    <meta name="author" content="Pave Sláma" />
+    <link href="/main.css" rel="stylesheet" />
+    <title>Rozhledna Haniperk</title>
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section home minus-20" data-anchor="home">
+        <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
+        <div class="split">
+          <div class="column">
+            <p class="mb-0">Teplota<br /><span class="number" id="temperature"><%= latest.temp %>&deg;C</span></p>
+            <div class="mt-0 split2">
+              <p class="column extrema maximum">
+                <span class="triangle"></span>
+                <span class="max" title="<%= extrema.temp.max.time %>"><%= extrema.temp.max.value %>&deg;C</span>
+              </p>
+              <p class="column extrema minimum">
+                <span class="triangle"></span>
+                <span class="min" title="<%= extrema.temp.min.time %>"><%= extrema.temp.min.value %>&deg;C</span>
+              </p>
+            </div>
+          </div>
+          <div class="column">
+            <p class="mb-0">Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity %>&percnt;</span></p>
+            <div class="mt-0 split2">
+              <p class="column extrema maximum">
+                <span class="triangle"></span>
+                <span class="max" title="<%= extrema.humidity.min.time %>"
+                  ><%= extrema.humidity.max.value %>&percnt;</span
+                >
+              </p>
+              <p class="column extrema minimum">
+                <span class="triangle"></span>
+                <span class="min" title="<%= extrema.humidity.min.time %>"
+                  ><%= extrema.humidity.min.value %>&percnt;</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <p class="last-update">Poslední aktualizace <span><%= latest.time %></span></p>
+      </div>
+      <!-- <div class="section charts">
+        <div class="row">
+          <h2>TEPLOTA</h2>
+        </div>
+        <div class="row">
+          <h2>VLHKOST</h2>
+        </div>
+      </div> -->
+      <div class="section fp-auto-height footer" data-anchor="footer">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10444.144536317575!2d14.1172053!3d49.1239489!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaa77953752e80b06!2sRozhledna%20Haniperk!5e0!3m2!1scs!2scz!4v1602527787989!5m2!1scs!2scz"
+          width="100%"
+          height="450"
+          frameborder="0"
+          style="border: 0"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+        ></iframe>
+        <div class="credits">&copy; Radioklub Vodňany <a href="http://ok1kfb.cz">OK1KFB</a></div>
+      </div>
+    </div>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "https://rozhlednahapiperk.cz",
+        "logo": "https://rozhlednahapiperk.cz/logo-blue.svg"
+      }
+    </script>
+    <script src="/index.js"></script>
+  </body>
+</html>
