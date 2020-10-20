@@ -21,7 +21,7 @@ getBackgroudClass = function (value) {
     <meta name="description" content="Aktuální počasí na rozhledně Haniperk" />
     <meta name="author" content="Pave Sláma" />
     <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-    <link href="/main.css" rel="stylesheet" />
+    <link href="/style.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -42,10 +42,10 @@ getBackgroudClass = function (value) {
     <div id="fullpage">
       <div class="section home <%= getBackgroudClass(latest.temp) %>" data-anchor="home">
         <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
-        <div class="split">
+        <div class="col-md-2">
           <div class="column">
             <p class="mb-0">Teplota<br /><span class="number" id="temperature"><%= latest.temp %>&deg;C</span></p>
-            <div class="mt-0 split2">
+            <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="triangle"></span>
                 <span class="max" title="<%= extrema.temp.max.time %>"><%= extrema.temp.max.value %>&deg;C</span>
@@ -58,7 +58,7 @@ getBackgroudClass = function (value) {
           </div>
           <div class="column">
             <p class="mb-0">Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity %>&percnt;</span></p>
-            <div class="mt-0 split2">
+            <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="triangle"></span>
                 <span class="max" title="<%= extrema.humidity.min.time %>"
@@ -98,6 +98,6 @@ getBackgroudClass = function (value) {
         "logo": "https://rozhlednahapiperk.cz/logo-blue.svg"
       }
     </script>
-    <script src="/index.js"></script>
+    <script src="/script.min.js"></script>
   </body>
 </html>

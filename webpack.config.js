@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: './src/public/scripts/index.ts',
@@ -32,7 +33,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.min.css',
+    }),
     new CopyPlugin({
       patterns: [{ from: path.resolve(__dirname, 'src', 'public', 'img'), to: path.resolve(__dirname, 'static') }],
     }),
@@ -74,9 +77,17 @@ module.exports = {
         },
       },
     }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true,
+    }),
   ],
   output: {
-    filename: 'index.js',
+    filename: 'script.min.js',
     path: path.resolve(__dirname, 'static'),
   },
 };
