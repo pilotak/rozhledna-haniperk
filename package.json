@@ -15,12 +15,14 @@
   },
   "dependencies": {
     "errorhandler": "^1.5.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "@types/errorhandler": "^1.5.0",
     "@types/express": "^4.17.8",
     "@types/fullpage.js": "^2.9.2",
+    "@types/serve-favicon": "^2.5.0",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -29,6 +31,7 @@
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.13.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "favicons-webpack-plugin": "github:jantimon/favicons-webpack-plugin#pull/227/head",
     "fullpage.js": "^3.0.9",
     "mini-css-extract-plugin": "^1.0.0",
     "moment": "^2.29.1",

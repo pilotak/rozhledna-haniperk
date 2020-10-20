@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   entry: './src/public/scripts/index.ts',
@@ -37,6 +38,41 @@ module.exports = {
     }),
     new MomentLocalesPlugin({
       localesToKeep: ['cs'],
+    }),
+    new FaviconsWebpackPlugin({
+      logo: path.resolve(__dirname, 'src/public/img/logo-blue.svg'),
+      prefix: '/favicon/',
+      favicons: {
+        background: 'transparent',
+        icons: {
+          android: false,
+          appleIcon: true,
+          appleStartup: false,
+          coast: false,
+          favicons: true,
+          firefox: false,
+          windows: false,
+          yandex: false,
+        },
+      },
+    }),
+    //inverse for Windows tiles
+    new FaviconsWebpackPlugin({
+      logo: path.resolve(__dirname, 'src/public/img/logo.svg'),
+      prefix: '/favicon/',
+      favicons: {
+        background: '#2C3E8C',
+        icons: {
+          android: false,
+          appleIcon: false,
+          appleStartup: false,
+          coast: false,
+          favicons: false,
+          firefox: false,
+          windows: true,
+          yandex: false,
+        },
+      },
     }),
   ],
   output: {
