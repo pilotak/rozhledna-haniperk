@@ -1,3 +1,17 @@
+<%
+getBackgroudClass = function (value) {
+  const round = Math.round(value / 2) * 2;
+  let result = '';
+
+  if (round < 0) {
+    result = 'minus';
+  } else {
+    result = 'plus-';
+  }
+
+  return result.concat(round.toString());
+};
+%>
 <!DOCTYPE html>
 
 <html lang="cs" dir="ltr">
@@ -26,7 +40,7 @@
   </head>
   <body>
     <div id="fullpage">
-      <div class="section home minus-20" data-anchor="home">
+      <div class="section home <%= getBackgroudClass(latest.temp) %>" data-anchor="home">
         <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
         <div class="split">
           <div class="column">
