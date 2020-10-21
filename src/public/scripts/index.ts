@@ -9,7 +9,7 @@ const fp = new fullpage('#fullpage', {
   licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
   autoScrolling: true,
   scrollBar: true,
-  responsiveHeight: 500,
+  responsiveHeight: 600,
 });
 
 document.getElementById('logo')?.addEventListener('click', (event) => {

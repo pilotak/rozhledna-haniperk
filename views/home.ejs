@@ -42,31 +42,31 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
         <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
         <div class="col-md-2">
           <div class="column">
-            <p class="mb-0">Teplota<br /><span class="number" id="temperature"><%= latest.temp %>&deg;C</span></p>
+            <p class="mb-0">Teplota<br /><span class="number" id="temperature"><%= latest.temp.toFixed(1) %>&deg;C</span></p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="arrow up"></span
-                ><span class="max" title="<%= extrema.temp.max.time %>"><%= extrema.temp.max.value %>&deg;C</span>
+                ><span class="max" title="<%= extrema.temp.max.time %>"><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span>
               </p>
               <p class="column extrema minimum">
                 <span class="arrow down"></span
-                ><span class="min" title="<%= extrema.temp.min.time %>"><%= extrema.temp.min.value %>&deg;C</span>
+                ><span class="min" title="<%= extrema.temp.min.time %>"><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span>
               </p>
             </div>
           </div>
           <div class="column">
-            <p class="mb-0">Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity %>&percnt;</span></p>
+            <p class="mb-0">Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity.toFixed(1) %>&percnt;</span></p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="arrow up"></span
                 ><span class="max" title="<%= extrema.humidity.max.time %>"
-                  ><%= extrema.humidity.max.value %>&percnt;</span
+                  ><%= extrema.humidity.max.value.toFixed(1) %>&percnt;</span
                 >
               </p>
               <p class="column extrema minimum">
                 <span class="arrow down"></span
                 ><span class="min" title="<%= extrema.humidity.min.time %>"
-                  ><%= extrema.humidity.min.value %>&percnt;</span
+                  ><%= extrema.humidity.min.value.toFixed(1) %>&percnt;</span
                 >
               </p>
             </div>
