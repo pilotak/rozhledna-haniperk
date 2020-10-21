@@ -25,6 +25,7 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png" />
     <link rel="apple-touch-icon" sizes="1024x1024" href="/favicon/apple-touch-icon-1024x1024.png" />
     <title>Rozhledna Haniperk</title>
+    <script src="/script.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DE22SEDG1Z"></script>
     <script>
@@ -42,20 +43,28 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
         <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
         <div class="col-md-2">
           <div class="column">
-            <p class="mb-0">Teplota<br /><span class="number" id="temperature"><%= latest.temp.toFixed(1) %>&deg;C</span></p>
+            <p class="mb-0">
+              Teplota<br /><span class="number" id="temperature"><%= latest.temp.toFixed(1) %>&deg;C</span>
+            </p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="arrow up"></span
-                ><span class="max" title="<%= extrema.temp.max.time %>"><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span>
+                ><span class="max" title="<%= extrema.temp.max.time %>"
+                  ><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span
+                >
               </p>
               <p class="column extrema minimum">
                 <span class="arrow down"></span
-                ><span class="min" title="<%= extrema.temp.min.time %>"><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span>
+                ><span class="min" title="<%= extrema.temp.min.time %>"
+                  ><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span
+                >
               </p>
             </div>
           </div>
           <div class="column">
-            <p class="mb-0">Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity.toFixed(1) %>&percnt;</span></p>
+            <p class="mb-0">
+              Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity.toFixed(1) %>&percnt;</span>
+            </p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum">
                 <span class="arrow up"></span
@@ -88,6 +97,10 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
         <div class="credits">&copy; Radioklub Vodňany <a href="http://ok1kfb.cz">OK1KFB</a></div>
       </div>
     </div>
+    <div class="nav">
+      <a href="#" title="Přejít na úvod" data-section="home"><span></span></a>
+      <a href="#" title="Přejít na mapu" data-section="footer"><span></span></a>
+    </div>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -96,6 +109,5 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
         "logo": "https://rozhlednahapiperk.cz/logo-blue.svg"
       }
     </script>
-    <script src="/script.min.js"></script>
   </body>
 </html>

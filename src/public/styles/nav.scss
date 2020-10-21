@@ -1,0 +1,30 @@
+.nav {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  z-index: 100;
+
+  > a {
+    width: 1.4rem;
+    height: 1.4rem;
+    padding: 0.5rem;
+    display: block;
+
+    span {
+      opacity: 0.4;
+      border: 0.12rem solid #fff;
+      border-radius: 50%;
+      display: block;
+      width: 70%;
+      height: 70%;
+      transition: all 0.2s ease-in;
+    }
+
+    &:hover {
+      span {
+        background-color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+}
