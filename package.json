@@ -1,21 +1,21 @@
 {
   "name": "rozhledna-haniperk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Webové stránky rozhlednahaniperk.cz",
   "homepage": "https://rozhlednahaniperk.cz",
   "author": "Pavel Sláma <info@pavelslama.cz>",
   "license": "GPL-3.0",
   "main": "dist/app/index.js",
   "scripts": {
     "start": "node .",
-    "start:dev": "npm run build:public && npm run build:app && npm run start",
-    "build:app": "tsc",
-    "build:public": "webpack",
+    "start:dev": "npm run build && npm run start",
+    "build": "tsc && webpack",
     "lint": "eslint ./src",
     "test": "jest --coverage",
     "test:local": "jest --clearCache && npm run test"
   },
   "dependencies": {
+    "ejs": "^3.1.5",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "serve-favicon": "^2.5.0"

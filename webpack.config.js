@@ -7,7 +7,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  entry: './src/public/scripts/index.ts',
+  entry: path.resolve(__dirname, 'src', 'public', 'scripts', 'index.ts'),
   module: {
     rules: [
       {
