@@ -1,6 +1,7 @@
 @import '~normalize.css';
 @import '~fullpage.js/dist/fullpage.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,300&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+@import './arrow.scss';
 
 $homepade-color: #0081ce;
 $footer-color: #f0f0e4;
@@ -87,17 +88,26 @@ h2 {
   .extrema {
     font-size: 1rem;
     font-weight: 300;
+    font-size: 1.2rem;
+
+    @media screen and (min-width: 480px) {
+      font-size: 1.1rem;
+    }
+
+    @media screen and (min-width: 800px) {
+      font-size: 1.2rem;
+    }
 
     &.maximum {
       margin-left: 8rem;
+      margin-right: 0.5rem;
 
       @media screen and (min-width: 480px) {
         margin-left: 2rem;
-        font-size: 1.2rem;
       }
 
       @media screen and (min-width: 600px) {
-        margin-left: 4rem;
+        margin-left: 3.5rem;
       }
 
       @media screen and (min-width: 800px) {
@@ -107,23 +117,18 @@ h2 {
       @media screen and (min-width: 1024px) {
         margin-left: 6rem;
       }
-
-      .triangle:before {
-        border-width: 0 7.5px 7px 7.5px;
-        border-color: transparent transparent #ffffff transparent;
-      }
     }
 
     &.minimum {
       margin-right: 8rem;
+      margin-left: 0.5rem;
 
       @media screen and (min-width: 480px) {
         margin-right: 2rem;
-        font-size: 1.2rem;
       }
 
       @media screen and (min-width: 600px) {
-        margin-right: 4rem;
+        margin-right: 3.5rem;
       }
 
       @media screen and (min-width: 800px) {
@@ -133,23 +138,6 @@ h2 {
       @media screen and (min-width: 1024px) {
         margin-right: 6rem;
       }
-
-      .triangle:before {
-        border-width: 7px 7.5px 0 7.5px;
-        border-color: #ffffff transparent transparent transparent;
-      }
-    }
-  }
-
-  .triangle {
-    &:before {
-      content: '';
-      display: inline-block;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      position: relative;
-      top: -0.1rem;
     }
   }
 
@@ -177,6 +165,7 @@ h2 {
     position: absolute;
     bottom: 0;
     right: 0;
+    font-weight: 300;
 
     @media screen and (max-width: 479px) {
       left: 0;
