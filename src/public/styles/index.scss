@@ -25,8 +25,9 @@ $plus32: #cc0f20;
 }
 
 body {
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  text-align: center;
 }
 
 h2 {
@@ -52,9 +53,9 @@ h2 {
 }
 
 .home {
+  color: white;
   font-weight: 100;
   font-size: 1.4rem;
-  font-family: 'Roboto', sans-serif;
 
   @media screen and (min-width: 480px) {
     font-size: 1.4rem;
@@ -179,122 +180,114 @@ h2 {
       font-size: 1.1rem;
     }
   }
+
+  &.minus-26 {
+    background: linear-gradient(12deg, $minus26, lighten($minus26, 16%));
+  }
+  &.minus-24 {
+    background: linear-gradient(12deg, mix($minus16, $minus26, 20%) 48%, lighten(mix($minus16, $minus26, 20%), 16%));
+  }
+  &.minus-22 {
+    background: linear-gradient(12deg, mix($minus16, $minus26, 40%) 48%, lighten(mix($minus16, $minus26, 40%), 16%));
+  }
+  &.minus-20 {
+    background: linear-gradient(12deg, mix($minus16, $minus26, 60%) 48%, lighten(mix($minus16, $minus26, 60%), 16%));
+  }
+  &.minus-18 {
+    background: linear-gradient(12deg, mix($minus16, $minus26, 80%) 48%, lighten(mix($minus16, $minus26, 80%), 16%));
+  }
+  &.minus-16 {
+    background: linear-gradient(12deg, $minus16 48%, lighten($minus16, 16%));
+  }
+  &.minus-14 {
+    background: linear-gradient(12deg, mix($minus10, $minus16, 33%) 48%, lighten(mix($minus10, $minus16, 33%), 16%));
+  }
+  &.minus-12 {
+    background: linear-gradient(12deg, mix($minus10, $minus16, 66%) 48%, lighten(mix($minus10, $minus16, 66%), 16%));
+  }
+  &.minus-10 {
+    background: linear-gradient(12deg, $minus10 48%, lighten($minus10, 16%));
+  }
+  &.minus-8 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 11%) 48%, lighten(mix($plus8, $minus10, 11%), 16%));
+  }
+  &.minus-6 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 22%) 48%, lighten(mix($plus8, $minus10, 22%), 16%));
+  }
+  &.minus-4 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 33%) 48%, lighten(mix($plus8, $minus10, 33%), 16%));
+  }
+  &.minus-2 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 44%) 48%, lighten(mix($plus8, $minus10, 44%), 16%));
+  }
+  &.plus-0 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 55%) 48%, lighten(mix($plus8, $minus10, 55%), 16%));
+  }
+  &.plus-2 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 66%) 48%, lighten(mix($plus8, $minus10, 66%), 16%));
+  }
+  &.plus-4 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 77%) 48%, lighten(mix($plus8, $minus10, 77%), 16%));
+  }
+  &.plus-6 {
+    background: linear-gradient(12deg, mix($plus8, $minus10, 88%) 48%, lighten(mix($plus8, $minus10, 88%), 16%));
+  }
+  &.plus-8 {
+    background: linear-gradient(12deg, $plus8 48%, lighten($plus8, 16%));
+  }
+  &.plus-10 {
+    background: linear-gradient(12deg, mix($plus14, $plus8, 33%) 48%, lighten(mix($plus14, $plus8, 33%), 16%));
+  }
+  &.plus-12 {
+    background: linear-gradient(12deg, mix($plus14, $plus8, 66%) 48%, lighten(mix($plus14, $plus8, 66%), 16%));
+  }
+  &.plus-14 {
+    background: linear-gradient(12deg, $plus14 48%, lighten($plus14, 16%));
+  }
+  &.plus-16 {
+    background: linear-gradient(12deg, mix($plus24, $plus14, 20%) 48%, lighten(mix($plus24, $plus14, 20%), 16%));
+  }
+  &.plus-18 {
+    background: linear-gradient(12deg, mix($plus24, $plus14, 40%) 48%, lighten(mix($plus24, $plus14, 40%), 16%));
+  }
+  &.plus-20 {
+    background: linear-gradient(12deg, mix($plus24, $plus14, 60%) 48%, lighten(mix($plus24, $plus14, 60%), 16%));
+  }
+  &.plus-22 {
+    background: linear-gradient(12deg, mix($plus24, $plus14, 80%) 48%, lighten(mix($plus24, $plus14, 80%), 16%));
+  }
+  &.plus-24 {
+    background: linear-gradient(12deg, $plus24 48%, lighten($plus24, 16%));
+  }
+  &.plus-26 {
+    background: linear-gradient(12deg, mix($plus32, $plus24, 25%) 48%, lighten(mix($plus32, $plus24, 25%), 16%));
+  }
+  &.plus-28 {
+    background: linear-gradient(12deg, mix($plus32, $plus24, 50%) 48%, lighten(mix($plus32, $plus24, 50%), 16%));
+  }
+  &.plus-30 {
+    background: linear-gradient(12deg, mix($plus32, $plus24, 75%) 48%, lighten(mix($plus32, $plus24, 75%), 16%));
+  }
+  &.plus-32 {
+    background: linear-gradient(12deg, $plus32 48%, lighten($plus32, 16%));
+  }
 }
 
-#fullpage {
-  .section {
-    text-align: center;
-  }
+.footer {
+  background: lighten($footer-color, 10%);
 
-  .home {
-    color: white;
+  .credits {
+    font-weight: 300;
+    margin: 0.5rem auto;
+    font-size: 0.9rem;
 
-    &.minus-26 {
-      background: linear-gradient(12deg, $minus26, lighten($minus26, 16%));
+    @media screen and (min-width: 480px) {
+      font-size: 1rem;
     }
-    &.minus-24 {
-      background: linear-gradient(12deg, mix($minus16, $minus26, 20%) 48%, lighten(mix($minus16, $minus26, 20%), 16%));
-    }
-    &.minus-22 {
-      background: linear-gradient(12deg, mix($minus16, $minus26, 40%) 48%, lighten(mix($minus16, $minus26, 40%), 16%));
-    }
-    &.minus-20 {
-      background: linear-gradient(12deg, mix($minus16, $minus26, 60%) 48%, lighten(mix($minus16, $minus26, 60%), 16%));
-    }
-    &.minus-18 {
-      background: linear-gradient(12deg, mix($minus16, $minus26, 80%) 48%, lighten(mix($minus16, $minus26, 80%), 16%));
-    }
-    &.minus-16 {
-      background: linear-gradient(12deg, $minus16 48%, lighten($minus16, 16%));
-    }
-    &.minus-14 {
-      background: linear-gradient(12deg, mix($minus10, $minus16, 33%) 48%, lighten(mix($minus10, $minus16, 33%), 16%));
-    }
-    &.minus-12 {
-      background: linear-gradient(12deg, mix($minus10, $minus16, 66%) 48%, lighten(mix($minus10, $minus16, 66%), 16%));
-    }
-    &.minus-10 {
-      background: linear-gradient(12deg, $minus10 48%, lighten($minus10, 16%));
-    }
-    &.minus-8 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 11%) 48%, lighten(mix($plus8, $minus10, 11%), 16%));
-    }
-    &.minus-6 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 22%) 48%, lighten(mix($plus8, $minus10, 22%), 16%));
-    }
-    &.minus-4 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 33%) 48%, lighten(mix($plus8, $minus10, 33%), 16%));
-    }
-    &.minus-2 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 44%) 48%, lighten(mix($plus8, $minus10, 44%), 16%));
-    }
-    &.plus-0 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 55%) 48%, lighten(mix($plus8, $minus10, 55%), 16%));
-    }
-    &.plus-2 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 66%) 48%, lighten(mix($plus8, $minus10, 66%), 16%));
-    }
-    &.plus-4 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 77%) 48%, lighten(mix($plus8, $minus10, 77%), 16%));
-    }
-    &.plus-6 {
-      background: linear-gradient(12deg, mix($plus8, $minus10, 88%) 48%, lighten(mix($plus8, $minus10, 88%), 16%));
-    }
-    &.plus-8 {
-      background: linear-gradient(12deg, $plus8 48%, lighten($plus8, 16%));
-    }
-    &.plus-10 {
-      background: linear-gradient(12deg, mix($plus14, $plus8, 33%) 48%, lighten(mix($plus14, $plus8, 33%), 16%));
-    }
-    &.plus-12 {
-      background: linear-gradient(12deg, mix($plus14, $plus8, 66%) 48%, lighten(mix($plus14, $plus8, 66%), 16%));
-    }
-    &.plus-14 {
-      background: linear-gradient(12deg, $plus14 48%, lighten($plus14, 16%));
-    }
-    &.plus-16 {
-      background: linear-gradient(12deg, mix($plus24, $plus14, 20%) 48%, lighten(mix($plus24, $plus14, 20%), 16%));
-    }
-    &.plus-18 {
-      background: linear-gradient(12deg, mix($plus24, $plus14, 40%) 48%, lighten(mix($plus24, $plus14, 40%), 16%));
-    }
-    &.plus-20 {
-      background: linear-gradient(12deg, mix($plus24, $plus14, 60%) 48%, lighten(mix($plus24, $plus14, 60%), 16%));
-    }
-    &.plus-22 {
-      background: linear-gradient(12deg, mix($plus24, $plus14, 80%) 48%, lighten(mix($plus24, $plus14, 80%), 16%));
-    }
-    &.plus-24 {
-      background: linear-gradient(12deg, $plus24 48%, lighten($plus24, 16%));
-    }
-    &.plus-26 {
-      background: linear-gradient(12deg, mix($plus32, $plus24, 25%) 48%, lighten(mix($plus32, $plus24, 25%), 16%));
-    }
-    &.plus-28 {
-      background: linear-gradient(12deg, mix($plus32, $plus24, 50%) 48%, lighten(mix($plus32, $plus24, 50%), 16%));
-    }
-    &.plus-30 {
-      background: linear-gradient(12deg, mix($plus32, $plus24, 75%) 48%, lighten(mix($plus32, $plus24, 75%), 16%));
-    }
-    &.plus-32 {
-      background: linear-gradient(12deg, $plus32 48%, lighten($plus32, 16%));
-    }
-  }
-  .charts {
-    background: linear-gradient(0deg, lighten($footer-color, 10%), $footer-color);
-  }
-  .footer {
-    background: lighten($footer-color, 10%);
 
-    .credits {
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      margin: 0.5rem auto;
-      font-size: 0.9rem;
-
-      @media screen and (min-width: 480px) {
-        font-size: 1rem;
-      }
+    a,
+    a:any-link {
+      color: black;
     }
   }
 }
