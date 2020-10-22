@@ -102,11 +102,10 @@ h2 {
       }
 
       &.maximum {
-        margin-left: 6rem;
+        margin-left: 4rem;
         margin-right: 0.5rem;
 
         @media screen and (min-width: 480px) {
-          margin-left: 8rem;
           margin-left: 2rem;
         }
 
@@ -124,11 +123,10 @@ h2 {
       }
 
       &.minimum {
-        margin-right: 6rem;
+        margin-right: 4rem;
         margin-left: 0.5rem;
 
         @media screen and (min-width: 480px) {
-          margin-right: 8rem;
           margin-right: 2rem;
         }
 
@@ -281,18 +279,31 @@ h2 {
   .footer {
     background: lighten($footer-color, 10%);
 
-    .credits {
-      font-weight: 300;
-      margin: 0.5rem auto;
-      font-size: 0.9rem;
+    .fp-tableCell {
+      display: flex;
+      flex-flow: column;
 
-      @media screen and (min-width: 480px) {
-        font-size: 1rem;
+      iframe {
+        width: 100%;
+        flex: 1 1 auto;
+        border: 0;
       }
 
-      a,
-      a:any-link {
-        color: black;
+      .credits {
+        font-weight: 300;
+        margin: 0.5rem auto;
+        font-size: 0.9rem;
+        flex: 0 1 0.9rem;
+
+        @media screen and (min-width: 480px) {
+          font-size: 1rem;
+          flex: 0 1 1rem;
+        }
+
+        a,
+        a:any-link {
+          color: black;
+        }
       }
     }
   }

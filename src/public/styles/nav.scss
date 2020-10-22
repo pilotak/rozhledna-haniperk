@@ -1,29 +1,91 @@
+$stroke: 0.4rem;
+$width: 1.5rem;
+
 .nav {
   position: fixed;
-  top: 50%;
-  right: 1rem;
+  bottom: 17%;
+  right: 0;
   z-index: 100;
 
-  > a {
-    width: 1.4rem;
-    height: 1.4rem;
-    padding: 0.5rem;
-    display: block;
+  @media screen and (min-height: 480px) {
+    bottom: 12%;
+  }
 
-    span {
-      opacity: 0.4;
-      border: 0.12rem solid #fff;
-      border-radius: 50%;
-      display: block;
-      width: 70%;
-      height: 70%;
-      transition: all 0.2s ease-in;
+  @media screen and (min-height: 600px) {
+    bottom: 10%;
+  }
+
+  @media screen and (min-height: 800px) {
+    bottom: 8%;
+  }
+
+  > a {
+    width: $width * 2;
+    height: $width;
+    display: block;
+    transition: opacity 0.2s ease-in;
+    transition: margin-right 0.4s ease-in;
+    opacity: 0.4;
+    margin-right: 0.75rem;
+
+    @media screen and (max-height: 480px) {
+      margin-right: 0.5rem !important;
+    }
+
+    @media screen and (min-width: 600px) {
+      margin-right: 1.5rem;
+    }
+
+    @media screen and (min-width: 800px) {
+      margin-right: 2rem;
     }
 
     &:hover {
+      opacity: 1;
+    }
+
+    &.home {
+      span {
+        background-color: #555;
+
+        &:first-of-type {
+          transform: rotate(-45deg);
+        }
+        &:last-of-type {
+          transform: rotate(45deg);
+        }
+      }
+    }
+    &.footer {
       span {
         background-color: #fff;
-        opacity: 1;
+
+        &:first-of-type {
+          transform: rotate(45deg);
+        }
+
+        &:last-of-type {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    > span {
+      display: inline-block;
+      width: $width;
+      height: $stroke;
+      display: inline-block;
+      position: relative;
+      transition: all 0.4s ease-in;
+      border-radius: 0.15rem;
+      box-shadow: 0 0 0.1rem rgba($color: #fff, $alpha: 0);
+
+      &:first-of-type {
+        right: -$width / 2 + $stroke;
+      }
+
+      &:last-of-type {
+        left: -$width / 2 + $stroke;
       }
     }
   }

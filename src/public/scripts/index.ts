@@ -50,16 +50,25 @@ document.addEventListener('DOMContentLoaded', () => {
     lastUpdate.parentElement?.setAttribute('title', title);
   }
 
-  // nav bullets
-  document.querySelectorAll('.nav > a')?.forEach((el) => {
-    el.addEventListener('click', (event) => {
+  const nav = document.querySelector('.nav > a');
+
+  if (nav) {
+    nav.addEventListener('click', (event) => {
       event.preventDefault();
 
-      const data = el.getAttribute('data-section');
+      fp.moveTo(nav.classList.contains('home') ? 'home' : 'footer');
+    });
 
-      if (data) {
-        fp.moveTo(data);
+    document.addEventListener('scroll', () => {
+      if (document.body.classList.contains('fp-viewing-home')) {
+        nav.classList.remove('home');
+        nav.classList.add('footer');
+        nav.setAttribute('title', 'Přejít na mapu');
+      } else {
+        nav.classList.remove('footer');
+        nav.classList.add('home');
+        nav.setAttribute('title', 'Přejít na úvod');
       }
     });
-  });
+  }
 });
