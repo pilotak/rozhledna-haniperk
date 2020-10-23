@@ -7,7 +7,7 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aktuální počasí na rozhledně Haniperk" />
-    <meta name="author" content="Pave Sláma" />
+    <meta name="author" content="Pavel Sláma" />
     <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
     <link href="/style.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="/favicon/favicon.ico" />
@@ -47,17 +47,11 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
               Teplota<br /><span class="number" id="temperature"><%= latest.temp.toFixed(1) %>&deg;C</span>
             </p>
             <div class="col-2 mt-0">
-              <p class="column extrema maximum">
-                <span class="arrow up"></span
-                ><span class="max" title="<%= extrema.temp.max.time %>"
-                  ><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span
-                >
+              <p class="column extrema maximum" title="<%= extrema.temp.max.time %>">
+                <span class="arrow up"></span><span class="max"><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span>
               </p>
-              <p class="column extrema minimum">
-                <span class="arrow down"></span
-                ><span class="min" title="<%= extrema.temp.min.time %>"
-                  ><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span
-                >
+              <p class="column extrema minimum" title="<%= extrema.temp.min.time %>">
+                <span class="arrow down"></span><span class="min"><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span>
               </p>
             </div>
           </div>
@@ -66,17 +60,13 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
               Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity.toFixed(1) %>&percnt;</span>
             </p>
             <div class="col-2 mt-0">
-              <p class="column extrema maximum">
+              <p class="column extrema maximum" title="<%= extrema.humidity.max.time %>">
                 <span class="arrow up"></span
-                ><span class="max" title="<%= extrema.humidity.max.time %>"
-                  ><%= extrema.humidity.max.value.toFixed(1) %>&percnt;</span
-                >
+                ><span class="max"><%= extrema.humidity.max.value.toFixed(1) %>&percnt;</span>
               </p>
-              <p class="column extrema minimum">
+              <p class="column extrema minimum" title="<%= extrema.humidity.min.time %>">
                 <span class="arrow down"></span
-                ><span class="min" title="<%= extrema.humidity.min.time %>"
-                  ><%= extrema.humidity.min.value.toFixed(1) %>&percnt;</span
-                >
+                ><span class="min"><%= extrema.humidity.min.value.toFixed(1) %>&percnt;</span>
               </p>
             </div>
           </div>
