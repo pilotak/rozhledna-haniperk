@@ -24,3 +24,5 @@ export interface LatestOutputData {
   latest: LatestData;
   extrema: Extrema;
 }
+
+export type DbExtremaRow = [string, number | null, number | null, number | null, number | null];

@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import favicon from 'serve-favicon';
 import { join } from 'path';
-import { renderHome } from './routes';
+import { renderHome, healthcheck } from './routes';
 
 const app: Application = express();
 
@@ -11,5 +11,6 @@ app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
 app.get('/', renderHome);
+app.get('/healthcheck', healthcheck);
 
 export default app;
