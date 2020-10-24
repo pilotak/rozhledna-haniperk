@@ -13,8 +13,19 @@ on:
     - cron: '0 9 1 * *'
 
 jobs:
-  node:
+  build:
     runs-on: ubuntu-latest
+    services:
+      influxdb:
+        image: influxdb:1.8-alpine
+        env:
+          INFLUXDB_DB: db
+          INFLUXDB_ADMIN_USER: admin
+          INFLUXDB_ADMIN_PASSWORD: supersecretpassword
+          INFLUXDB_REPORTING_DISABLED: true
+        ports:
+          - 8087:8086
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,13 +33,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Install InfluxDB
+      - name: Write data to DB
         run: |
-          docker run --rm -d -p 8087:8086 -e INFLUXDB_DB=db -e INFLUXDB_ADMIN_USER=admin -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword -e INFLUXDB_REPORTING_DISABLED=true influxdb:1.8-alpine
+          bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8087/ping)" != "204" ]]; do sleep 5; done'
 
-          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=23.586,humidity=68.45 battery=50 1603519200000000'
-          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=24.586,humidity=67.55 battery=40 1603522800000000'
-          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=25.586,humidity=66.25 battery=30 1603526400000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=23.586,humidity=68.45 battery=50 1603519200000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=24.586,humidity=67.55 battery=40 1603522800000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=25.586,humidity=66.25 battery=30 1603526400000000'
 
       - name: NPM install
         run: npm ci
