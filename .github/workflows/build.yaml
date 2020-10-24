@@ -1,0 +1,58 @@
+name: build
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+  schedule:
+    - cron: '0 9 1 * *'
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Install InfluxDB
+        run: |
+          docker run --rm -d \
+            --name test_db \
+            -p 8087:8086 \
+            -e INFLUXDB_DB=db \
+            -e INFLUXDB_ADMIN_USER=admin -e INFLUXDB_ADMIN_PASSWORD=supersecretpassword \
+            -e INFLUXDB_REPORTING_DISABLED=true
+            influxdb:1.8-alpine
+
+          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=23.586,humidity=68.45 battery=50 1603519200000000'
+          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=24.586,humidity=67.55 battery=40 1603522800000000'
+          curl -i -XPOST 'http://localhost:8087/write?db=db' --data-binary 'test,temperature=25.586,humidity=66.25 battery=30 1603526400000000'
+
+      - name: NPM install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: NPM Build
+        run: npm run build
+
+      - name: Coveralls
+        if: ${{ github.event_name != 'schedule' }}
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker Build
+        uses: docker/build-push-action@v2
