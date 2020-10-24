@@ -27,8 +27,16 @@ describe('Database with different ENV', () => {
     process.env = OLD_ENV; // restore old env
   });
 
-  it('Get invalid measurement', async () => {
+  it('Invalid measurement', async () => {
     process.env.INFLUX_MEASUREMENT = 'random';
+
+    const res = await getLatest();
+    expect(res.latest.temp).toBe(null);
+    expect(res.extrema.temp.max.value).toBe(null);
+  });
+
+  it('Undefined measurement', async () => {
+    process.env.INFLUX_MEASUREMENT = undefined;
 
     const res = await getLatest();
     expect(res.latest.temp).toBe(null);
