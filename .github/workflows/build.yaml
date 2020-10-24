@@ -40,9 +40,9 @@ jobs:
         run: |
           bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8087/ping)" != "204" ]]; do sleep 5; done'
 
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=23.586,humidity=68.45 battery=50 1603519200000000'
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=24.586,humidity=67.55 battery=40 1603522800000000'
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test,temperature=25.586,humidity=66.25 battery=30 1603526400000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=23.586,humidity=68.45,battery=50 1603533600000000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=24.586,humidity=67.55,battery=40 1608807600000000000'
+          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=25.586,humidity=66.25,battery=30 1608811200000000000'
 
       - name: NPM Build
         run: npm run build
