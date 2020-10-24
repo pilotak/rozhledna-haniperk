@@ -1,5 +1,6 @@
 <% getBackgroudClass = function (value) { const round = Math.round(value / 2) * 2; let result = ''; if (round < 0) {
-result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toString()); }; %>
+result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toString()); }; checkInvalid =
+function(number) { if(number === null){ return '--' } return number.toFixed(1) } %>
 <!DOCTYPE html>
 
 <html lang="cs" dir="ltr">
@@ -44,29 +45,30 @@ result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toStri
         <div class="col-md-2">
           <div class="column">
             <p class="mb-0">
-              Teplota<br /><span class="number" id="temperature"><%= latest.temp.toFixed(1) %>&deg;C</span>
+              Teplota<br /><span class="number" id="temperature"><%= checkInvalid(latest.temp) %>&deg;C</span>
             </p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum" title="<%= extrema.temp.max.time %>">
-                <span class="arrow up"></span><span class="max"><%= extrema.temp.max.value.toFixed(1) %>&deg;C</span>
+                <span class="arrow up"></span><span class="max"><%= checkInvalid(extrema.temp.max.value) %>&deg;C</span>
               </p>
               <p class="column extrema minimum" title="<%= extrema.temp.min.time %>">
-                <span class="arrow down"></span><span class="min"><%= extrema.temp.min.value.toFixed(1) %>&deg;C</span>
+                <span class="arrow down"></span
+                ><span class="min"><%= checkInvalid(extrema.temp.min.value) %>&deg;C</span>
               </p>
             </div>
           </div>
           <div class="column">
             <p class="mb-0">
-              Vlhkost<br /><span class="number" id="humidity"><%= latest.humidity.toFixed(1) %>&percnt;</span>
+              Vlhkost<br /><span class="number" id="humidity"><%= checkInvalid(latest.humidity) %>&percnt;</span>
             </p>
             <div class="col-2 mt-0">
               <p class="column extrema maximum" title="<%= extrema.humidity.max.time %>">
                 <span class="arrow up"></span
-                ><span class="max"><%= extrema.humidity.max.value.toFixed(1) %>&percnt;</span>
+                ><span class="max"><%= checkInvalid(extrema.humidity.max.value) %>&percnt;</span>
               </p>
               <p class="column extrema minimum" title="<%= extrema.humidity.min.time %>">
                 <span class="arrow down"></span
-                ><span class="min"><%= extrema.humidity.min.value.toFixed(1) %>&percnt;</span>
+                ><span class="min"><%= checkInvalid(extrema.humidity.min.value)%>&percnt;</span>
               </p>
             </div>
           </div>
