@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = moment(el.getAttribute('title')).format('LLL');
 
     if (title == 'Invalid date') {
-      title = '---';
+      title = '--';
     }
 
     el.setAttribute('title', title);
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = moment(lastUpdate.textContent).format('LLL');
 
     if (text == 'Invalid date' || title == 'Invalid date') {
-      text = title = '---';
+      text = title = '--';
     }
 
     lastUpdate.textContent = text;
