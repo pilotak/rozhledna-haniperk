@@ -19,7 +19,7 @@ jobs:
 
           VERSION=$(git tag --points-at HEAD)
           VERSION=${VERSION//v}
-          IMAGE_TAGS="${{ github.repository }}:latest,${{ github.repository }}:${VERSION}"
+          IMAGE_TAGS="ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${VERSION}"
 
           echo "## :bookmark_tabs: Changes" >>"CHANGELOG.md"
           git log --pretty=format:"- %s %H%n" $(git describe --abbrev=0 --tags $(git describe --tags --abbrev=0)^)...$(git describe --tags --abbrev=0) >>"CHANGELOG.md"
