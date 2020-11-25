@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // converts datetime
-  document.querySelectorAll('span.max, span.min')?.forEach((el) => {
+  document.querySelectorAll('p.maximum, p.minimum')?.forEach((el) => {
     let title = moment(el.getAttribute('title')).format('LLL');
 
     if (title == 'Invalid date') {
