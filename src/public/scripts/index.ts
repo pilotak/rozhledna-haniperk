@@ -7,7 +7,7 @@ moment.locale('cs');
 
 document.addEventListener('DOMContentLoaded', () => {
   const fp = new fullpage('#fullpage', {
-    licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+    licenseKey: 'B!m3OxD@i9',
     autoScrolling: true,
     scrollBar: true,
     responsiveHeight: 600,
