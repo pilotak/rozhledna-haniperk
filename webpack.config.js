@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'public', 'scripts', 'index.ts'),
@@ -27,6 +27,9 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
+  },
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
     extensions: ['.ts', '.js', '.scss'],
@@ -60,7 +63,7 @@ module.exports = {
       },
     }),
     //inverse for Windows tiles
-    new FaviconsWebpackPlugin({
+    /*new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'src/public/img/logo.svg'),
       prefix: '/favicon/',
       favicons: {
@@ -76,15 +79,7 @@ module.exports = {
           yandex: false,
         },
       },
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
-      },
-      canPrint: true,
-    }),
+    }),*/
   ],
   output: {
     filename: 'script.min.js',

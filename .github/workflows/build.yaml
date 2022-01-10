@@ -8,9 +8,7 @@ on:
       - master
   pull_request:
     branches:
-      - '*'
-  schedule:
-    - cron: '0 9 1 * *'
+      - master
 
 jobs:
   build:
@@ -51,7 +49,7 @@ jobs:
         run: npm run test
 
       - name: Coveralls
-        if: ${{ github.event_name != 'schedule' }}
+        if: ${{ github.event_name == 'push' }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
