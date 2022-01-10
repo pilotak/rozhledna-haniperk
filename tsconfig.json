@@ -1,9 +1,23 @@
 {
-  "extends": "./tsconfig.base.json",
+  "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "resolveJsonModule": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ES2021"],
+    "module": "CommonJS",
+    "target": "ES2021",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "rootDir": "./src/app",
+    "outDir": "./dist/app",
+    "declaration": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "strict": true,
+    "alwaysStrict": true,
+    "incremental": true,
+    "esModuleInterop": true
   },
-  "exclude": ["src/public"]
+  "references": [],
+  "include": ["src/app"],
+  "exclude": ["src/app/__tests__"]
 }

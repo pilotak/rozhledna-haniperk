@@ -1,6 +1,5 @@
 import fullpage from 'fullpage.js';
 import moment from 'moment';
-
 import '../styles/index.scss';
 
 moment.locale('cs');

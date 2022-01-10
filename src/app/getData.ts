@@ -2,8 +2,7 @@ import { escape } from 'influx';
 import moment from 'moment';
 import { DB } from './lib/DB';
 
-import { sanitizeHumidity, sanitizeTemperature, extractExtrema, emptyData } from './utils';
-import { LatestOutputData } from '../../types';
+import { sanitizeHumidity, sanitizeTemperature, extractExtrema, emptyData, LatestOutputData } from './utils';
 
 const db = DB.connect();
 

@@ -1,27 +1,16 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'public', 'scripts', 'index.ts'),
+  mode: 'production',
+  entry: path.resolve(__dirname, 'src/scripts/index.js'),
   module: {
     rules: [
-      {
-        test: /\.ts$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              configFile: 'tsconfig.public.json',
-            },
-          },
-        ],
-        exclude: /node_modules/,
-      },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
@@ -29,21 +18,24 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.scss'],
+    extensions: ['.scss', '.js'],
   },
   plugins: [
+    new MomentLocalesPlugin({
+      localesToKeep: ['cs'],
+    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.min.css',
     }),
     new CopyPlugin({
-      patterns: [{ from: path.resolve(__dirname, 'src', 'public', 'img'), to: path.resolve(__dirname, 'static') }],
-    }),
-    new MomentLocalesPlugin({
-      localesToKeep: ['cs'],
+      patterns: [
+        { from: path.resolve(__dirname, 'src/img'), to: path.resolve(__dirname, 'static') },
+        { from: path.resolve(__dirname, 'src/views'), to: path.resolve(__dirname, 'views') },
+      ],
     }),
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, 'src/public/img/logo-blue.svg'),
+      logo: path.resolve(__dirname, 'src/img/logo-blue.svg'),
       prefix: '/favicon/',
       favicons: {
         background: 'transparent',
@@ -61,7 +53,7 @@ module.exports = {
     }),
     //inverse for Windows tiles
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, 'src/public/img/logo.svg'),
+      logo: path.resolve(__dirname, 'src/img/logo.svg'),
       prefix: '/favicon/',
       favicons: {
         background: '#2C3E8C',
@@ -77,15 +69,10 @@ module.exports = {
         },
       },
     }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
-      },
-      canPrint: true,
-    }),
   ],
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
   output: {
     filename: 'script.min.js',
     path: path.resolve(__dirname, 'static'),

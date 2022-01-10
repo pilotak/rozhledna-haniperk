@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "target": "es5",
-    "module": "es6"
-  },
-  "exclude": ["./src/app"]
-}
