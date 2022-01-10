@@ -1,5 +1,4 @@
-import { sanitizeHumidity, sanitizeTemperature, extractExtrema, emptyData } from '../utils';
-import { DbExtremaRow } from '../../../types';
+import { sanitizeHumidity, sanitizeTemperature, extractExtrema, emptyData, DbExtremaRow } from '../utils';
 
 describe('Utils', () => {
   it('Invalid temp 150°C', () => {
