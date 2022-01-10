@@ -21,7 +21,7 @@ dist/
 *-debug.log
 *-error.log
 
-coverage/
-static/
-dist/
-views/
+/coverage
+/static
+/dist
+/views

@@ -1,0 +1,101 @@
+<% getBackgroudClass = function (value) { const round = Math.round(value / 2) * 2; let result = ''; if (round < 0) {
+result = 'minus'; } else { result = 'plus-'; } return result.concat(round.toString()); }; checkInvalid =
+function(number) { if(number === null){ return '--' } return number.toFixed(1) } %>
+<!DOCTYPE html>
+
+<html lang="cs" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aktuální počasí na rozhledně Haniperk" />
+    <meta name="author" content="Pavel Sláma" />
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+    <link href="/style.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/favicon/apple-touch-icon-167x167.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png" />
+    <link rel="apple-touch-icon" sizes="1024x1024" href="/favicon/apple-touch-icon-1024x1024.png" />
+    <title>Rozhledna Haniperk</title>
+    <script src="/script.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DE22SEDG1Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-DE22SEDG1Z');
+    </script>
+  </head>
+  <body>
+    <div id="fullpage">
+      <div class="section home <%= getBackgroudClass(latest.temp) %>" data-anchor="home">
+        <a href="#" id="logo"><img src="/logo.svg" alt="Logo Haniperk" /></a>
+        <div class="col-md-2">
+          <div class="column">
+            <p class="mb-0">
+              Teplota<br /><span class="number" id="temperature"><%= checkInvalid(latest.temp) %>&deg;C</span>
+            </p>
+            <div class="col-2 mt-0">
+              <p class="column extrema maximum" title="<%= extrema.temp.max.time %>">
+                <span class="arrow up"></span><span class="max"><%= checkInvalid(extrema.temp.max.value) %>&deg;C</span>
+              </p>
+              <p class="column extrema minimum" title="<%= extrema.temp.min.time %>">
+                <span class="arrow down"></span
+                ><span class="min"><%= checkInvalid(extrema.temp.min.value) %>&deg;C</span>
+              </p>
+            </div>
+          </div>
+          <div class="column">
+            <p class="mb-0">
+              Vlhkost<br /><span class="number" id="humidity"><%= checkInvalid(latest.humidity) %>&percnt;</span>
+            </p>
+            <div class="col-2 mt-0">
+              <p class="column extrema maximum" title="<%= extrema.humidity.max.time %>">
+                <span class="arrow up"></span
+                ><span class="max"><%= checkInvalid(extrema.humidity.max.value) %>&percnt;</span>
+              </p>
+              <p class="column extrema minimum" title="<%= extrema.humidity.min.time %>">
+                <span class="arrow down"></span
+                ><span class="min"><%= checkInvalid(extrema.humidity.min.value)%>&percnt;</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p class="last-update">Poslední aktualizace <span><%= latest.time %></span></p>
+      </div>
+      <div class="section footer" data-anchor="footer">
+        <iframe
+          src="https://frame.mapy.cz/s/gerorusofa"
+          frameborder="0"
+          allowfullscreen=""
+          aria-hidden="false"
+        ></iframe>
+
+        <div class="credits">&copy; Radioklub Vodňany <a href="http://ok1kfb.cz">OK1KFB</a></div>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="#" title="Přejít na mapu" class="footer"><span></span><span></span></a>
+    </div>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "https://rozhlednahaniperk.cz",
+        "logo": "https://rozhlednahaniperk.cz/logo-blue.svg"
+      }
+    </script>
+  </body>
+</html>
