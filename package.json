@@ -10,7 +10,7 @@
     "start": "node .",
     "start:dev": "npm run build && npm run start",
     "build": "tsc -b && webpack",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint ./src/app"
   },
   "dependencies": {
