@@ -1,2 +1,3 @@
 export * from './home';
-export * from './healthcheck';
+export * from './status';
+export * from './data';
