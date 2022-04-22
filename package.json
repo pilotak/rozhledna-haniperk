@@ -36,7 +36,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "favicons-webpack-plugin": "^5.0.2",
-    "fullpage.js": "^3.1.2",
+    "fullpage.js": "^4.0.5",
     "jest": "^27.5.1",
     "mini-css-extract-plugin": "^2.6.0",
     "moment-locales-webpack-plugin": "^1.2.0",
