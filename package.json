@@ -16,7 +16,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "errorhandler": "^1.5.1",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "influx": "^5.9.3",
     "moment": "^2.29.4",
     "serve-favicon": "^2.5.0"
