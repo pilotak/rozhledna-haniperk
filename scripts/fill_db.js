@@ -13,12 +13,17 @@ const client = new Client({
 const insertData = async () => {
   await client.connect();
 
-  const query = 'INSERT INTO sensors (temperature, humidity, battery, timestamp) VALUES ($1, $2, $3, now())';
-  const values = [23.586, 68.45, 50];
-
   try {
-    const res = await client.query(query, values);
-    console.log('Data inserted:', res.rowCount);
+    // create table
+    await client.query(
+      'CREATE TABLE sensors (temperature real, humidity real, battery smallint, timestamp timestamptz NOT NULL)',
+    );
+
+    // insert data
+    await client.query(
+      'INSERT INTO sensors (temperature, humidity, battery, timestamp) VALUES ($1, $2, $3, now())',
+      [23.586, 68.45, 50],
+    );
   } catch (err) {
     console.error('Error inserting data:', err.stack);
   } finally {

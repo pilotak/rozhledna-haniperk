@@ -20,6 +20,7 @@ jobs:
         image: postgres:16-alpine
         env:
           POSTGRES_PASSWORD: '123456789abcd'
+          POSTGRES_DB: test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
