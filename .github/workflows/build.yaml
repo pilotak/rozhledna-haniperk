@@ -33,6 +33,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check conventional commits
+        uses: webiny/action-conventional-commits@v1.3.0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
