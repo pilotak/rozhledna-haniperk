@@ -1,48 +1,123 @@
-import { escape } from 'influx';
-import moment from 'moment';
-import { DB } from './lib/DB';
+import { Client, types } from 'pg';
+import { LatestOutputData, Extrema, LatestData } from './types';
+import env from './env';
 
-import { sanitizeHumidity, sanitizeTemperature, extractExtrema, emptyData, LatestOutputData } from './utils';
+const client = new Client({
+  host: env.PGHOST,
+  user: env.PGUSER,
+  port: env.PGPORT,
+  password: env.PGPASSWORD,
+  database: env.PGDATABASE,
+});
 
-const db = DB.connect();
+types.setTypeParser(types.builtins.NUMERIC, (val: string) => parseFloat(val));
+types.setTypeParser(types.builtins.FLOAT4, (val: string) => parseFloat(val));
+types.setTypeParser(types.builtins.FLOAT8, (val: string) => parseFloat(val));
 
 export const getLatest = async (): Promise<LatestOutputData> => {
   try {
-    const measurement = process.env.INFLUX_MEASUREMENT ? process.env.INFLUX_MEASUREMENT : '';
-    const output = emptyData();
+    await client.connect();
     // Get latest temperature, humidity and time
-    let query = await db.queryRaw(
-      `SELECT temperature, humidity, time FROM "${escape.measurement(measurement)}" GROUP BY * ORDER BY DESC LIMIT 1`,
+    const latest = await client.query<LatestData>(
+      `SELECT
+        CASE
+          WHEN temperature > 125 OR temperature < -55 THEN NULL
+          ELSE ROUND(temperature::numeric, 1)
+        END AS temp,
+        CASE
+          WHEN humidity > 100 OR humidity < 0 THEN NULL
+          ELSE ROUND(humidity::numeric, 1)
+        END AS humidity,
+        timestamp AS time
+      FROM sensors
+      ORDER BY
+        timestamp DESC
+      LIMIT 1`,
     );
 
-    if ('series' in query.results[0] === false) {
+    if (latest.rowCount === 0) {
       throw new Error('Empty SQL result');
     }
 
-    const data = query.results[0].series[0].values[0];
-
-    output.latest.temp = sanitizeTemperature(data[1]);
-    output.latest.humidity = sanitizeHumidity(data[2]);
-    output.latest.time = data[0];
-
     // Get min/max from the day of latest data
-    const lastTime = moment(data[0]).set('hour', 0).set('minute', 0).set('second', 0).format('YYYY-MM-DD HH:mm:ss');
-
-    query = await db.queryRaw(
-      `SELECT * FROM (SELECT MAX(temperature) AS a FROM "${escape.measurement(
-        measurement,
-      )}" WHERE time >= ${escape.stringLit(lastTime)}),(SELECT MIN(temperature) AS b FROM "${escape.measurement(
-        measurement,
-      )}" WHERE time >= ${escape.stringLit(lastTime)}),(SELECT MAX(humidity) AS c FROM "${escape.measurement(
-        measurement,
-      )}" WHERE time >= ${escape.stringLit(lastTime)}),(SELECT MIN(humidity) AS d FROM "${escape.measurement(
-        measurement,
-      )}" WHERE time >= ${escape.stringLit(lastTime)})`,
+    const extrema = await client.query<{ extrema: Extrema }>(
+      `SELECT
+        JSONB_BUILD_OBJECT(
+          'temp',
+          JSONB_BUILD_OBJECT(
+            'min',
+            JSONB_BUILD_OBJECT(
+              'value',
+              min_temp.temperature,
+              'time',
+              min_temp.timestamp
+            ),
+            'max',
+            JSONB_BUILD_OBJECT(
+              'value',
+              max_temp.temperature,
+              'time',
+              max_temp.timestamp
+            )
+          ),
+          'humidity',
+          JSONB_BUILD_OBJECT(
+            'min',
+            JSONB_BUILD_OBJECT(
+              'value',
+              min_humidity.humidity,
+              'time',
+              min_humidity.timestamp
+            ),
+            'max',
+            JSONB_BUILD_OBJECT(
+              'value',
+              max_humidity.humidity,
+              'time',
+              max_humidity.timestamp
+            )
+          )
+        ) AS extrema
+      FROM
+        (SELECT timestamp, temperature FROM sensors WHERE timestamp >= date_trunc('day', $1::TIMESTAMP) AND temperature is not NULL AND temperature < 125 AND temperature > -55 ORDER BY temperature DESC LIMIT 1) AS max_temp,
+        (SELECT timestamp, temperature FROM sensors WHERE timestamp >= date_trunc('day', $1::TIMESTAMP) AND temperature is not NULL AND temperature < 125 AND temperature > -55 ORDER BY temperature ASC LIMIT 1) AS min_temp,
+        (SELECT timestamp, humidity FROM sensors WHERE timestamp >= date_trunc('day', $1::TIMESTAMP) AND humidity is not NULL AND humidity <= 100 AND humidity > 0 ORDER BY humidity DESC LIMIT 1) AS max_humidity,
+        (SELECT timestamp, humidity FROM sensors WHERE timestamp >= date_trunc('day', $1::TIMESTAMP) AND humidity is not NULL AND humidity <= 100 AND humidity > 0 ORDER BY humidity ASC LIMIT 1) AS min_humidity`,
+      [(latest.rows[0].time as unknown as Date).toISOString()],
     );
-
-    return extractExtrema(query.results[0].series[0].values, output);
+    return { extrema: extrema.rows[0].extrema, latest: latest.rows[0] };
   } catch (err) {
     console.error(err);
-    return emptyData();
+    return {
+      latest: {
+        temp: null,
+        humidity: null,
+        time: '',
+      },
+      extrema: {
+        temp: {
+          max: {
+            value: null,
+            time: '',
+          },
+          min: {
+            value: null,
+            time: '',
+          },
+        },
+        humidity: {
+          max: {
+            value: null,
+            time: '',
+          },
+          min: {
+            value: null,
+            time: '',
+          },
+        },
+      },
+    };
+  } finally {
+    await client.end();
   }
 };

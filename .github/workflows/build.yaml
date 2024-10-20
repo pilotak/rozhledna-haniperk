@@ -13,55 +13,59 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
     services:
-      influxdb:
-        image: influxdb:1.8-alpine
+      postgres:
+        image: postgres:16-alpine
         env:
-          INFLUXDB_DB: db
-          INFLUXDB_ADMIN_USER: admin
-          INFLUXDB_ADMIN_PASSWORD: supersecretpassword
-          INFLUXDB_REPORTING_DISABLED: true
+          POSTGRES_PASSWORD: '123456789abcd'
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
-          - 8087:8086
+          - 5432:5432
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          always-auth: true
-          node-version: '16.x'
+          node-version: 20
 
       - name: NPM install
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Post-install
+        run: npm rebuild && npm run prepare --if-present
 
       - name: Lint
         run: npm run lint
 
-      - name: Write data to DB
+      - name: Prepare DB
         run: |
-          bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8087/ping)" != "204" ]]; do sleep 5; done'
+          npm run db:fill
+        env:
+          PGUSER: postgres
+          PGDATABASE: test
+          PGPASSWORD: 123456789abcd
 
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=23.586,humidity=68.45,battery=50 1603533600000000000'
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=24.586,humidity=67.55,battery=40 1608807600000000000'
-          curl -i -XPOST 'localhost:8087/write?db=db' --data-binary 'test temperature=25.586,humidity=66.25,battery=30 1608811200000000000'
-
-      - name: NPM Build
+      - name: Build
         run: npm run build
 
       - name: Test
         run: npm run test
+        env:
+          PGUSER: postgres
+          PGDATABASE: test
+          PGPASSWORD: 123456789abcd
 
       - name: Coveralls
         if: ${{ github.event_name == 'push' }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Docker Build
-        uses: docker/build-push-action@v2
