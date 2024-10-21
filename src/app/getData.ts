@@ -1,13 +1,15 @@
-import { Client, types } from 'pg';
+import { Pool, types, PoolClient } from 'pg';
 import { LatestOutputData, Extrema, LatestData } from './types';
 import env from './env';
 
-const client = new Client({
+const pool = new Pool({
   host: env.PGHOST,
   user: env.PGUSER,
   port: env.PGPORT,
   password: env.PGPASSWORD,
   database: env.PGDATABASE,
+  max: 2,
+  idleTimeoutMillis: 30000,
 });
 
 types.setTypeParser(types.builtins.NUMERIC, (val: string) => parseFloat(val));
@@ -15,8 +17,10 @@ types.setTypeParser(types.builtins.FLOAT4, (val: string) => parseFloat(val));
 types.setTypeParser(types.builtins.FLOAT8, (val: string) => parseFloat(val));
 
 export const getLatest = async (): Promise<LatestOutputData> => {
+  let client: PoolClient | undefined = undefined;
+
   try {
-    await client.connect();
+    client = await pool.connect();
     // Get latest temperature, humidity and time
     const latest = await client.query<LatestData>(
       `SELECT
@@ -118,6 +122,8 @@ export const getLatest = async (): Promise<LatestOutputData> => {
       },
     };
   } finally {
-    await client.end();
+    if (client) {
+      client.release();
+    }
   }
 };
