@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/pilotak/rozhledna-haniperk/compare/v2.0.3...v2.0.4) (2024-10-21)
+
+
+### Bug Fixes
+
+* use CI PAT for release ([5867bfd](https://github.com/pilotak/rozhledna-haniperk/commit/5867bfd82addcd0cd30850d5babb6e0fba6ef0fa))
+
 ## [2.0.3](https://github.com/pilotak/rozhledna-haniperk/compare/v2.0.2...v2.0.3) (2024-10-21)
 
 
