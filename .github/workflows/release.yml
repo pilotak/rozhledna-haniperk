@@ -1,5 +1,10 @@
 name: release
 
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
 on:
   push:
     branches:
