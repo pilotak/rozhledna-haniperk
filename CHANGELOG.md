@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/pilotak/rozhledna-haniperk/compare/v2.0.2...v2.0.3) (2024-10-21)
+
+
+### Bug Fixes
+
+* another CI fix ([f7d21de](https://github.com/pilotak/rozhledna-haniperk/commit/f7d21defee4bf381b4cee7a6854e7b347e0ef452))
+
 ## [2.0.2](https://github.com/pilotak/rozhledna-haniperk/compare/v2.0.1...v2.0.2) (2024-10-21)
 
 
