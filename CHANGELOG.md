@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/pilotak/rozhledna-haniperk/compare/v2.0.0...v2.0.1) (2024-10-21)
+
+
+### Bug Fixes
+
+* PG use pool ([ec0d8e5](https://github.com/pilotak/rozhledna-haniperk/commit/ec0d8e56ba80f5224a831c506a8edea17d7b5874))
+
 ## [2.0.0](https://github.com/pilotak/rozhledna-haniperk/compare/v1.1.0...v2.0.0) (2024-10-20)
 
 
