@@ -1,10 +1,5 @@
 name: release
 
-permissions:
-  contents: write
-  pull-requests: write
-  packages: write
-
 on:
   push:
     branches:
@@ -29,6 +24,8 @@ jobs:
     needs: release_helper
     if: ${{ needs.release_helper.outputs.release }}
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
